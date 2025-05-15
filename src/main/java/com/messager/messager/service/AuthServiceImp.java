@@ -12,9 +12,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.messager.messager.dto.request.LoginRequest;
-import com.messager.messager.dto.request.RegisterRequest;
-import com.messager.messager.dto.response.AuthResponse;
+import com.messager.messager.dto.AccountDTO.request.LoginRequest;
+import com.messager.messager.dto.AccountDTO.request.RegisterRequest;
+import com.messager.messager.dto.AccountDTO.response.AuthResponse;
 import com.messager.messager.exception.ResourceExistedException;
 import com.messager.messager.exception.ResourceNotFoundException;
 import com.messager.messager.model.Account;

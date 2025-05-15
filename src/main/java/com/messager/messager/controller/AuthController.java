@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.messager.messager.dto.request.LoginRequest;
-import com.messager.messager.dto.request.RegisterRequest;
-import com.messager.messager.dto.response.AuthResponse;
+import com.messager.messager.dto.AccountDTO.request.LoginRequest;
+import com.messager.messager.dto.AccountDTO.request.RegisterRequest;
+import com.messager.messager.dto.AccountDTO.response.AuthResponse;
 import com.messager.messager.model.Account;
 import com.messager.messager.service.AuthService;
 

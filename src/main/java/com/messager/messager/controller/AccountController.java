@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.messager.messager.dto.response.AccountResponse;
+import com.messager.messager.dto.AccountDTO.response.AccountResponse;
 import com.messager.messager.service.AccountService;
 
 @RestController

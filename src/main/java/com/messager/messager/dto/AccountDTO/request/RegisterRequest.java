@@ -1,4 +1,4 @@
-package com.messager.messager.dto.request;
+package com.messager.messager.dto.AccountDTO.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

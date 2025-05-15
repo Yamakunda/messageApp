@@ -1,4 +1,4 @@
-package com.messager.messager.dto.response;
+package com.messager.messager.dto.AccountDTO.response;
 
 import java.util.Set;
 

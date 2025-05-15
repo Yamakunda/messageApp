@@ -7,7 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import com.messager.messager.dto.response.AccountResponse;
+import com.messager.messager.dto.AccountDTO.response.AccountResponse;
 import com.messager.messager.exception.ResourceNotFoundException;
 import com.messager.messager.model.Account;
 import com.messager.messager.repository.AccountRepository;
