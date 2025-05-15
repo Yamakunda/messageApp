@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  # Your Spring Boot Application
+  app:
+    build: .
+    container_name: messager-app
+    ports:
+      - "8080:8080" # Map host port 8080 to container port 8080
+    environment:
+      # Database Configuration (references the 'db' service)
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/mydatabase # 'db' is the service name of postgres
+      - SPRING_DATASOURCE_USERNAME=myuser
+      - SPRING_DATASOURCE_PASSWORD=mypassword
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update # Or create, validate, none depending on your strategy
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
+      # JWT Secret (IMPORTANT: Use a strong, unique secret for production)
+      - APP_JWT_SECRET=${APP_JWT_SECRET:-YourSuperSecretKeyForJWTsWhichIsVeryLongAndSecureAndAtLeast256BitsCHANGEME}
+      - APP_JWT_EXPIRATION_MS=86400000
+    depends_on:
+      db: # Ensures 'db' service starts before 'app' (but doesn't guarantee readiness)
+        condition: service_healthy
+    networks:
+      - mynetwork
+
+  # PostgreSQL Database
+  db:
+    image: postgres:15 # Use a specific version for stability
+    container_name: messager-db
+    ports:
+      - "5432:5432" 
+    environment:
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=mypassword
+      - POSTGRES_DB=mydatabase
+    volumes:
+      - pgdata:/var/lib/postgresql/data # Persist database data
+    healthcheck: # Checks if PostgreSQL is ready to accept connections
+      test: ["CMD-SHELL", "pg_isready -U myuser -d mydatabase"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - mynetwork
+    restart: unless-stopped
+
+# Docker Networks
+networks:
+  mynetwork:
+    driver: bridge
+
+# Docker Volumes (for data persistence)
+volumes:
+  pgdata:
