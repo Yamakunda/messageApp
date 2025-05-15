@@ -72,7 +72,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
 
         // If shouldNotFilter returned false, we are here and need to process the token
-        logger.debug("Executing doFilterInternal for {}", request.getRequestURI());
+        logger.debug("Executing do FilterInternal for {}", request.getRequestURI());
 
         try {
             String jwt = getJwtFromRequest(request);

@@ -9,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -58,18 +59,16 @@ public class AuthServiceImp implements AuthService {
 
     @Override
     public AuthResponse authenticateAccount(LoginRequest loginRequest) {
-        logger.info("Authenticating user: {}", loginRequest.getUsername());
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getUsername(),
                         loginRequest.getPassword()));
-        logger.info("Authentication successful for user: {}", loginRequest.getUsername());
-
         SecurityContextHolder.getContext().setAuthentication(authentication);
         logger.info("Security context updated with authentication for user: {}", authentication);
 
-        Account acc = (Account) authentication.getPrincipal();
-        String username = acc.getUsername();
+        User user = (User) authentication.getPrincipal();
+        // Account acc = (Account) authentication.getPrincipal();
+        String username = user.getUsername();
 
         // Fetch your custom User entity to get its ID and other details
         Account customUser = accountRepository.findByUsername(username)

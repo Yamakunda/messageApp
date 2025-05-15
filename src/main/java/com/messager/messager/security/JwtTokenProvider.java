@@ -7,8 +7,9 @@ import javax.crypto.SecretKey;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+
+import com.messager.messager.model.Account;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -56,12 +57,12 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    public String generateTokenFromUserDetails(UserDetails userDetails, Long customUserId) {
+    public String generateTokenFromAccount(Account account, Long customUserId) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + jwtExpirationMs);
 
         return Jwts.builder()
-                .setSubject(userDetails.getUsername())
+                .setSubject(account.getUsername())
                 .claim("accountId", customUserId)
                 .setIssuedAt(new Date())
                 .setExpiration(expiryDate)

@@ -22,12 +22,14 @@ public class AccountServiceImp implements AccountService {
 
     @Override
     public AccountResponse getCurrentAccount() {
+        logger.info("Fetching current account");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        logger.info("Authentication: {}", authentication);
         if (authentication == null || !authentication.isAuthenticated()
                 || "anonymousUser".equals(authentication.getPrincipal())) {
             return null;
         }
-
+        logger.info("Current Principal: {}",authentication.getPrincipal());
         Account acc = (Account) authentication.getPrincipal();
         String username = acc.getUsername();
 
